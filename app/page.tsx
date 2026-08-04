@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Horizon = "short" | "medium" | "long";
 type Mode = "build" | "one";
+type CausalModel = { edges: Array<{ source: string; target: string; weight: number }> };
 
 const inputs = [
   { id: "aiSpend", label: "Enterprise AI spending growth", short: "AI spend growth", unit: "% / year", min: 0, max: 30, step: 1, baseline: 14, observed: 16, note: "Global enterprise spend flowing into AI integration and transformation work." },
@@ -21,14 +22,15 @@ const baseline = Object.fromEntries(inputs.map((input) => [input.id, input.basel
 function clamp(value: number, min: number, max: number) { return Math.min(max, Math.max(min, value)); }
 function signed(value: number, digits = 0) { return `${value >= 0 ? "+" : "−"}${Math.abs(value).toFixed(digits)}${digits ? " pts" : "%"}`; }
 
-function simulate(values: Record<string, number>, horizon: Horizon) {
+function simulate(values: Record<string, number>, horizon: Horizon, model?: CausalModel) {
+  const edgeWeight = (source: string, target: string, fallback: number) => model?.edges.find((edge) => edge.source === source && edge.target === target)?.weight ?? fallback;
   const h = horizon === "short" ? 0.72 : horizon === "medium" ? 1 : 1.22;
-  const demand = clamp(40 + (values.aiSpend - 14) * 1.35 + (values.adoption - 42) * 0.48 + (values.gdp - 3.2) * 3.4, 8, 92);
-  const capacity = clamp(35 + (values.reskilling - 28) * 0.7 + (values.capability - 34) * 0.62 + (values.productivity - 18) * 0.25, 8, 92);
+  const demand = clamp(40 + (values.aiSpend - 14) * edgeWeight("aiSpend", "integration", 1.35) + (values.adoption - 42) * edgeWeight("adoption", "integration", 0.48) + (values.gdp - 3.2) * 3.4, 8, 92);
+  const capacity = clamp(35 + (values.reskilling - 28) * edgeWeight("reskilling", "capacity", 0.7) + (values.capability - 34) * edgeWeight("capability", "capacity", 0.62) + (values.productivity - 18) * 0.25, 8, 92);
   const automation = clamp(26 + (values.adoption - 42) * 0.5 + (values.productivity - 18) * 0.86 - (values.reskilling - 28) * 0.16, 5, 88);
   const pressure = clamp(24 + (values.pricing - 18) * 0.92 + (values.productivity - 18) * 0.38 + (values.insourcing - 22) * 0.48, 5, 80);
   const integration = clamp(demand * 0.55 + capacity * 0.26 + values.aiSpend * 0.55, 12, 92);
-  const captured = clamp(integration * 0.6 + capacity * 0.3 - pressure * 0.27 - values.insourcing * 0.18, 5, 90);
+  const captured = clamp(integration * 0.6 + capacity * 0.3 - pressure * 0.27 - values.insourcing * edgeWeight("insourcing", "captured", 0.18), 5, 90);
   const revenue = clamp((captured - 40) * 0.42 * h + (values.gdp - 2.5) * 1.4, -12, 24);
   const headcount = clamp(revenue * 0.8 + (values.reskilling - 28) * 0.12 - automation * 0.1 + 2, -18, 18);
   const aiRoles = clamp(44 + capacity * 0.32 + values.adoption * 0.2 - pressure * 0.1, 20, 92);
@@ -47,6 +49,14 @@ function explain(changed: string, delta: number, result: ReturnType<typeof simul
 }
 
 export default function Home() {
+  const [model, setModel] = useState<CausalModel | undefined>();
+  const [modelLoaded, setModelLoaded] = useState(false);
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/generated/causal-models.json`)
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error("Model unavailable")))
+      .then((data: CausalModel) => { setModel(data); setModelLoaded(true); })
+      .catch(() => setModelLoaded(false));
+  }, []);
   const [values, setValues] = useState<Record<string, number>>(() => {
     if (typeof window === "undefined") return baseline;
     const encoded = new URLSearchParams(window.location.search).get("s");
@@ -61,14 +71,14 @@ export default function Home() {
     if (typeof window === "undefined") return [];
     try { return JSON.parse(localStorage.getItem("scenario-simulator-saved") ?? "[]"); } catch { return []; }
   });
-  const base = useMemo(() => simulate(baseline, horizon), [horizon]);
-  const result = useMemo(() => simulate(values, horizon), [values, horizon]);
+  const base = useMemo(() => simulate(baseline, horizon, model), [horizon, model]);
+  const result = useMemo(() => simulate(values, horizon, model), [values, horizon, model]);
   const changedInput = inputs.find((input) => values[input.id] !== baseline[input.id]);
   const sensitivity = useMemo(() => inputs.map((input) => {
     const changed = { ...baseline, [input.id]: clamp(baseline[input.id] + input.step * 3, input.min, input.max) };
-    const impact = simulate(changed, horizon).expansion - base.expansion;
+    const impact = simulate(changed, horizon, model).expansion - base.expansion;
     return { ...input, impact };
-  }).sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact)), [base.expansion, horizon]);
+  }).sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact)), [base.expansion, horizon, model]);
 
   function updateValue(id: string, value: number) { setValues((current) => ({ ...current, [id]: value })); }
   function reset() { setValues({ ...baseline }); }
@@ -84,9 +94,31 @@ export default function Home() {
     const blob = new Blob([JSON.stringify({ scenarioName, horizon, geography: "India", inputs: values, modelVersion: "illustrative-0.1" }, null, 2)], { type: "application/json" });
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `${scenarioName.replace(/\s+/g, "-").toLowerCase()}.json`; link.click(); URL.revokeObjectURL(link.href);
   }
+  async function importScenario(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      const imported = JSON.parse(await file.text()) as { inputs?: Record<string, number>; horizon?: Horizon; scenarioName?: string };
+      if (!imported.inputs) throw new Error("Inputs are missing");
+      setValues({ ...baseline, ...imported.inputs });
+      if (imported.horizon && ["short", "medium", "long"].includes(imported.horizon)) setHorizon(imported.horizon);
+      if (imported.scenarioName) setScenarioName(imported.scenarioName);
+    } catch {
+      window.alert("That file is not a valid Scenario Simulator JSON export.");
+    } finally {
+      event.target.value = "";
+    }
+  }
 
   return (
     <main className="shell">
+      <section className="site-heading" aria-labelledby="site-title">
+        <p className="site-kicker">Future Scenario Mapping — 2026 Edition</p>
+        <h1 id="site-title">Indian IT Scenario Simulator</h1>
+        <p>This tool does not predict one fixed future. It shows how plausible outcomes change when evidence or assumptions change.</p>
+        <span className="model-status">Current model status: Demonstration model using illustrative coefficients{modelLoaded ? " · model loaded" : ""}</span>
+        <label className="file-button">Import JSON<input type="file" accept="application/json,.json" onChange={importScenario} /></label>
+      </section>
       <header className="topbar">
         <div className="brand"><span className="brand-mark">↗</span><span>SCENARIO <b>SIMULATOR</b></span></div>
         <div className="topbar-right"><span className="live-dot" /> Browser-only model <span className="divider" /> <span className="version">MODEL 0.1 · ILLUSTRATIVE</span></div>

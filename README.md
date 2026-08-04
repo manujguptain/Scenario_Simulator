@@ -1,100 +1,57 @@
-# vinext-starter
+# Indian IT Scenario Simulator
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Future Scenario Mapping is a browser-only simulator for exploring how eight assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified probabilities, impact analysis, sensitivity ranking, local saving, JSON export/import, and shareable URL state.
 
-## Prerequisites
+The coefficients are currently illustrative and are not empirically validated. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required.
 
-- Node.js `>=22.13.0`
+## Run locally on Windows
 
-## Quick Start
+Install Node.js 22 or newer, open PowerShell in this repository, and run:
 
-```bash
+```powershell
 npm install
 npm run dev
+```
+
+Open the local URL printed by Vite (normally `http://localhost:5173/`). To preview the repository subdirectory path locally, set `$env:VITE_BASE_PATH = '/Scenario_Simulator/'` before `npm run dev`. Use the sliders, switch horizons, save a local scenario, copy a share link, or export JSON.
+
+## Build and test
+
+```powershell
+npm run lint
+npm test
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+The static output is written to `dist/`. The build verification checks the HTML, JavaScript and CSS assets, model JSON, relative paths, subdirectory compatibility, and absence of server or Cloudflare endpoints.
 
-## Included Shape
+## Base path
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+The single configuration setting is `VITE_BASE_PATH`. The default is `./`, which makes the same static files portable under both `/Scenario_Simulator/` and `/future-map/`. To emit an explicit Hugo integration path, use:
 
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```powershell
+$env:VITE_BASE_PATH = '/future-map/'
+npm run build
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The value must start and end with `/`. Clear the variable or set it to `/Scenario_Simulator/` for the standalone repository path.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## GitHub Pages
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+The workflow in `.github/workflows/deploy-pages.yml` runs on pushes to `main` and manual runs. It installs Node 22, runs lint and tests, builds the app, uploads only `dist/`, and deploys with the official Pages actions.
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+In GitHub, open **Settings → Pages**, choose **GitHub Actions** as the source, then push to `main` or select **Actions → Deploy static simulator to GitHub Pages → Run workflow**. In **Settings → Actions → General**, ensure workflows are allowed. The repository is currently private; an open-source Pages deployment should use a public repository unless the GitHub account plan supports Pages from private repositories. This project does not change visibility automatically.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+For a repository named `Scenario_Simulator`, the expected URL is `https://manujg.github.io/Scenario_Simulator/`. The exact URL is shown in the workflow’s `github-pages` environment after deployment.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## Hugo PaperMod integration
 
-## Useful Commands
+Build with `VITE_BASE_PATH=/future-map/`, copy the contents of `dist/` into the Hugo site’s `static/future-map/` directory, and publish the Hugo site. The simulator should then be available at `https://manujg.com/future-map/`. Keep the trailing slash and copy the `data/` directory so `causal-models.json` remains available.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Updating the model
 
-## Learn More
+Edit `public/data/generated/causal-models.json`, preserving its schema and valid JSON. The browser fetches this file at startup. Update the model version and description when coefficients or edges change, then run `npm test` and manually move each slider to verify that downstream values, probabilities, impact analysis, and sensitivity ranking update.
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+## Known limitations
+
+This is a demonstration model, not a forecast or investment recommendation. Scenario saves use browser-local storage and do not sync between devices. Share URLs encode inputs in the query string. GitHub Pages serves the static application only; direct refresh works for query-string scenario URLs, while additional clean URL routes are not part of this one-page app.

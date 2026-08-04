@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const dist = new URL("../dist/", import.meta.url).pathname.replace(/^\//, "").replaceAll("/", "\\");
+const dist = fileURLToPath(new URL("../dist/", import.meta.url));
 assert.ok(existsSync(join(dist, "index.html")), "dist/index.html is required");
 assert.ok(existsSync(join(dist, "data", "generated", "causal-models.json")), "causal-models.json is required");
 const html = readFileSync(join(dist, "index.html"), "utf8");

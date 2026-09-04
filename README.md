@@ -9,7 +9,11 @@ The coefficients are currently illustrative and are not empirically validated. T
 ### 04 September 2026 — model 0.2
 
 - Grouped developments into durable categories: delivery-location economics, client operating-model shift, automation and work redesign, and India capability capture. H-1B and Japanese GCC developments are now evidence for categories, not permanent standalone model dimensions.
-- The structural update was prompted by: (1) H-1B and dependent-work uncertainty, which changes delivery-location economics but can lead either to India-based delivery or to more local hiring/insourcing; (2) AI adoption and reported job-risk signals, which increase short-term work-redesign pressure while creating longer-term capability demand; and (3) Japanese GCC expansion, which is evidence for India capability capture and client operating-model shift. The initial probability movement reflects this model redesign, not an observed improvement in the sector.
+- The structural update was prompted by three evidence updates, each with an explicit directional assessment:
+  1. **H-1B and dependent-work uncertainty — mixed / uncertain.** It puts downward pressure on onsite mobility, but could increase India-based delivery; the opposing risk is more local hiring, GCC expansion or client insourcing.
+  2. **AI adoption and reported job-risk signals — mixed.** It adds near-term negative pressure on routine work and hiring, with a longer-term upside only if Indian firms capture new AI and engineering work.
+  3. **Japanese GCC expansion — positive, confidence-weighted.** It may increase India-based engineering and higher-value capability demand, but the eventual scale and timing are uncertain.
+- The 34%→36% expansion movement reflects this model redesign, not an observed improvement in the sector. No individual development has been assigned a fabricated percentage-point contribution.
 - Added a historical release view for the three calculated outcomes: expansion probability, compression probability and mixed-transition probability. The initial change is marked as a structural recalibration, not as evidence of a real industry move.
 - Treated AI employment risk as bounded exposure to work redesign, not a forecast that 20% of all jobs will disappear.
 - The current figures remain illustrative pending empirical calibration and backtesting.

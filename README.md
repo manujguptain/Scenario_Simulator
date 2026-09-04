@@ -8,8 +8,8 @@ The coefficients are currently illustrative and are not empirically validated. T
 
 ### 04 September 2026 — model 0.2
 
-- Added separate H-1B policy shock, routine-work AI exposure, and Japanese GCC expansion assumptions.
-- Added a historical release trendline for the probability-weighted GDP and Indian IT growth house view.
+- Grouped developments into durable categories: delivery-location economics, client operating-model shift, automation and work redesign, and India capability capture. H-1B and Japanese GCC developments are now evidence for categories, not permanent standalone model dimensions.
+- Added a historical release trendline for the central, probability-weighted Indian IT growth/compression outlook.
 - Treated AI employment risk as bounded exposure to work redesign, not a forecast that 20% of all jobs will disappear.
 - The current figures remain illustrative pending empirical calibration and backtesting.
 

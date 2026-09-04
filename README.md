@@ -2,7 +2,16 @@
 
 Future Scenario Mapping is a browser-only simulator for exploring how eight assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified probabilities, impact analysis, sensitivity ranking, local saving, JSON export/import, and shareable URL state.
 
-The coefficients are currently illustrative and are not empirically validated. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required.
+The coefficients are currently illustrative and are not empirically validated. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
+
+## Public changelog
+
+### 04 September 2026 — model 0.2
+
+- Added separate H-1B policy shock, routine-work AI exposure, and Japanese GCC expansion assumptions.
+- Added a historical release trendline for the probability-weighted GDP and Indian IT growth house view.
+- Treated AI employment risk as bounded exposure to work redesign, not a forecast that 20% of all jobs will disappear.
+- The current figures remain illustrative pending empirical calibration and backtesting.
 
 ## Run locally on Windows
 

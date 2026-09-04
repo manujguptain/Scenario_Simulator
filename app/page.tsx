@@ -7,8 +7,24 @@ type Mode = "build" | "one";
 type CausalModel = { edges: Array<{ source: string; target: string; weight: number }> };
 
 const modelHistory = [
-  { date: "04 Aug 2026", version: "0.1", outlook: 5.0, note: "Initial illustrative baseline" },
-  { date: "04 Sep 2026", version: "0.2", outlook: 5.1, note: "Evidence update: delivery-location economics, work redesign and India capability capture" },
+  {
+    date: "04 Aug 2026",
+    version: "0.1",
+    expansion: 34,
+    compression: 52,
+    mixed: 13,
+    note: "Initial illustrative model snapshot.",
+    changeType: "model release",
+  },
+  {
+    date: "04 Sep 2026",
+    version: "0.2",
+    expansion: 36,
+    compression: 51,
+    mixed: 13,
+    note: "Structural recalibration: durable categories added. This is not an observed industry result.",
+    changeType: "structural recalibration",
+  },
 ];
 
 const inputs = [
@@ -159,7 +175,7 @@ export default function Home() {
 
       <section className="bottom-grid"><div className="sensitivity panel"><div className="panel-head"><div><p className="eyebrow">SENSITIVITY RANKING</p><h2>Which assumptions matter most?</h2></div><span className="help">local · one-step impact</span></div>{sensitivity.slice(0, 5).map((item) => <div className="sensitivity-row" key={item.id}><span>{item.short}</span><div className="sensitivity-track"><i className={item.impact >= 0 ? "positive" : "negative-bar"} style={{ width: `${Math.min(100, Math.abs(item.impact) * 12)}%` }} /></div><b>{item.impact >= 0 ? "+" : "−"}{Math.abs(item.impact).toFixed(1)} pts</b></div>)}</div><div className="scenario panel"><div className="panel-head"><div><p className="eyebrow">SCENARIO WORKSPACE</p><h2>Save, compare, share</h2></div><span className="saved-count">{saved.length} saved locally</span></div><input className="scenario-name" value={scenarioName} onChange={(event) => setScenarioName(event.target.value)} aria-label="Scenario name" /><div className="scenario-actions"><button onClick={saveScenario}>＋ Save scenario</button><button onClick={share}>↗ Copy share link</button><button onClick={exportScenario}>↓ Export JSON</button></div><div className="model-note"><b>Model transparency</b><p>Weighted causal model · deterministic templates · bounded values · model version illustrative-0.1 · recalibration 04 Aug 2026.</p></div></div></section>
 
-      <section className="trend panel"><div className="panel-head"><div><p className="eyebrow">MODEL HISTORY</p><h2>Published Indian IT outlook</h2></div><span className="help">release snapshots · not actuals</span></div><p className="trend-copy">The line records the central, probability-weighted Indian IT growth or compression outcome at each model release. It changes only when evidence changes the published baseline.</p><div className="trend-chart"><svg viewBox="0 0 720 190" preserveAspectRatio="none"><line x1="45" y1="20" x2="45" y2="155" /><line x1="45" y1="155" x2="690" y2="155" /><polyline className="gdp-line" points="70,93 650,84" /><polyline className="it-line" points="70,73 650,61" /><circle cx="70" cy="93" r="5" /><circle cx="650" cy="84" r="5" /><circle cx="70" cy="73" r="5" /><circle cx="650" cy="61" r="5" /></svg><div className="trend-labels"><span>Central Indian IT outlook <b>+5.0% → +5.1%</b></span><span>Positive is expansion; negative is compression.</span></div></div><div className="release-list">{modelHistory.map((release) => <div key={release.version}><b>{release.date} · v{release.version}</b><span>{release.note}</span><strong>{release.outlook >= 0 ? "+" : ""}{release.outlook.toFixed(1)}% outlook</strong></div>)}</div></section>
+      <section className="trend panel"><div className="panel-head"><div><p className="eyebrow">MODEL HISTORY</p><h2>Published probability history</h2></div><span className="help">released baselines · not actuals</span></div><p className="trend-copy">This records what the published baseline calculated at each model release: the probability of expansion, compression or a mixed transition. It does not use a made-up growth number, and it does not change when a visitor adjusts a scenario.</p><div className="trend-chart"><svg viewBox="0 0 720 190" preserveAspectRatio="none"><line x1="45" y1="20" x2="45" y2="155" /><line x1="45" y1="155" x2="690" y2="155" /><polyline className="expansion-line" points="70,109 650,106" /><polyline className="compression-line" points="70,85 650,86" /><polyline className="mixed-line" points="70,137 650,137" /><circle className="expansion-point" cx="70" cy="109" r="5" /><circle className="expansion-point" cx="650" cy="106" r="5" /><circle className="compression-point" cx="70" cy="85" r="5" /><circle className="compression-point" cx="650" cy="86" r="5" /><circle className="mixed-point" cx="70" cy="137" r="5" /><circle className="mixed-point" cx="650" cy="137" r="5" /></svg><div className="trend-labels"><span><i className="trend-key expansion-key" />Expansion <b>34% → 36%</b></span><span><i className="trend-key compression-key" />Compression <b>52% → 51%</b></span><span><i className="trend-key mixed-key" />Mixed transition <b>13% → 13%</b></span></div></div><div className="release-list">{modelHistory.map((release) => <div key={release.version}><b>{release.date} · v{release.version}</b><span><em>{release.changeType}</em> · {release.note}</span><strong>Expansion {release.expansion}% · Compression {release.compression}% · Mixed {release.mixed}%</strong></div>)}</div></section>
 
       <footer><span>SCENARIO SIMULATOR · INDIAN IT</span><span>Illustrative coefficients, not empirically validated. <button>View methodology ↗</button></span></footer>
     </main>

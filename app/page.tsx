@@ -22,7 +22,7 @@ const modelHistory = [
     expansion: 36,
     compression: 51,
     mixed: 13,
-    note: "Structural recalibration: durable categories added. This is not an observed industry result.",
+    note: "Why it changed: H-1B and dependent-work uncertainty was mapped to delivery-location economics; AI adoption and reported job-risk signals to automation and work redesign; Japanese GCC expansion to client operating-model shift and India capability capture. The 34%→36% expansion change is a model-structure recalibration, not a claim that the industry itself improved.",
     changeType: "structural recalibration",
   },
 ];

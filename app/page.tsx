@@ -6,6 +6,11 @@ type Horizon = "short" | "medium" | "long";
 type Mode = "build" | "one";
 type CausalModel = { edges: Array<{ source: string; target: string; weight: number }> };
 
+const modelHistory = [
+  { date: "04 Aug 2026", version: "0.1", gdp: 6.1, it: 7.0, note: "Initial illustrative baseline" },
+  { date: "04 Sep 2026", version: "0.2", gdp: 6.2, it: 7.4, note: "Added H-1B, AI employment risk and Japanese GCC signals" },
+];
+
 const inputs = [
   { id: "aiSpend", label: "Enterprise AI spending growth", short: "AI spend growth", unit: "% / year", min: 0, max: 30, step: 1, baseline: 14, observed: 16, note: "Global enterprise spend flowing into AI integration and transformation work." },
   { id: "adoption", label: "Enterprise AI adoption", short: "Enterprise adoption", unit: "% of firms", min: 10, max: 90, step: 1, baseline: 42, observed: 47, note: "Share of large enterprises moving beyond pilots into production use." },
@@ -15,6 +20,9 @@ const inputs = [
   { id: "capability", label: "Domain-skilled AI capability", short: "AI capability", unit: "% of workforce", min: 10, max: 80, step: 1, baseline: 34, observed: 31, note: "People who combine technical AI fluency with sector and client context." },
   { id: "gdp", label: "Global economic growth", short: "Global GDP growth", unit: "%", min: -2, max: 7, step: 0.5, baseline: 3.2, observed: 2.9, note: "Illustrative macro backdrop for discretionary technology spend." },
   { id: "insourcing", label: "Client insourcing rate", short: "Client insourcing", unit: "%", min: 5, max: 50, step: 1, baseline: 22, observed: 23, note: "Share of work clients choose to bring in-house as capabilities mature." },
+  { id: "h1bShock", label: "H-1B policy shock", short: "H-1B shock", unit: "index", min: 0, max: 100, step: 1, baseline: 35, observed: 35, note: "Likelihood and intensity of higher visa costs or restrictions. This is a scenario input, not a confirmed policy outcome." },
+  { id: "aiExposure", label: "Routine work AI exposure", short: "AI job exposure", unit: "% of work", min: 5, max: 20, step: 1, baseline: 10, observed: 10, note: "Bounded estimate of routine work exposed to AI-related redesign. It is not a forecast of total job losses." },
+  { id: "japanGcc", label: "Japanese GCC expansion", short: "Japanese GCCs", unit: "index", min: 0, max: 100, step: 1, baseline: 55, observed: 55, note: "Strength of the Japanese GCC expansion signal in India, including engineering and digital work." },
 ] as const;
 
 const baseline = Object.fromEntries(inputs.map((input) => [input.id, input.baseline])) as Record<string, number>;
@@ -31,10 +39,10 @@ function simulate(values: Record<string, number>, horizon: Horizon, model?: Caus
   const pressure = clamp(24 + (values.pricing - 18) * 0.92 + (values.productivity - 18) * 0.38 + (values.insourcing - 22) * 0.48, 5, 80);
   const integration = clamp(demand * 0.55 + capacity * 0.26 + values.aiSpend * 0.55, 12, 92);
   const captured = clamp(integration * 0.6 + capacity * 0.3 - pressure * 0.27 - values.insourcing * edgeWeight("insourcing", "captured", 0.18), 5, 90);
-  const revenue = clamp((captured - 40) * 0.42 * h + (values.gdp - 2.5) * 1.4, -12, 24);
-  const headcount = clamp(revenue * 0.8 + (values.reskilling - 28) * 0.12 - automation * 0.1 + 2, -18, 18);
-  const aiRoles = clamp(44 + capacity * 0.32 + values.adoption * 0.2 - pressure * 0.1, 20, 92);
-  const traditionalRoles = clamp(62 - automation * 0.42 - pressure * 0.16 + values.gdp * 0.4, 8, 78);
+  const revenue = clamp((captured - 40) * 0.42 * h + (values.gdp - 2.5) * 1.4 + values.japanGcc * 0.025 - values.h1bShock * 0.012, -12, 24);
+  const headcount = clamp(revenue * 0.8 + (values.reskilling - 28) * 0.12 - automation * 0.1 - values.aiExposure * 0.18 + values.japanGcc * 0.025 + 2, -18, 18);
+  const aiRoles = clamp(44 + capacity * 0.32 + values.adoption * 0.2 - pressure * 0.1 + values.japanGcc * 0.12, 20, 92);
+  const traditionalRoles = clamp(62 - automation * 0.42 - pressure * 0.16 + values.gdp * 0.4 - values.aiExposure * 0.5 - values.h1bShock * 0.08, 8, 78);
   const expansion = clamp(42 + revenue * 1.65 + (capacity - pressure) * 0.2, 8, 88);
   const compression = clamp(41 - revenue * 1.15 + pressure * 0.42 - capacity * 0.16, 8, 82);
   const mixed = clamp(100 - expansion - compression, 6, 80);
@@ -150,6 +158,8 @@ export default function Home() {
         <div className="impact panel"><div className="panel-head"><div><p className="eyebrow">IMPACT PANEL</p><h2>What moved downstream</h2></div><span className="tag">{horizon === "medium" ? "lag-aware" : "horizon-adjusted"}</span></div><div className="impact-list"><div><span className="impact-icon up">↑</span><div><b>AI-role demand</b><p>Domain-skilled roles and integration work</p></div><strong>{signed(result.aiRoles - base.aiRoles, 1)}</strong></div><div><span className="impact-icon up">↑</span><div><b>Revenue opportunity</b><p>Captured value after delivery capacity</p></div><strong>{signed(result.captured - base.captured, 1)}</strong></div><div><span className="impact-icon down">↓</span><div><b>Traditional-role demand</b><p>Repetitive work under automation pressure</p></div><strong>{signed(result.traditionalRoles - base.traditionalRoles, 1)}</strong></div><div><span className="impact-icon lag">◌</span><div><b>Fresher hiring</b><p>Expected to follow revenue with a 1–2 year lag</p></div><strong>{signed(result.headcount - base.headcount, 1)}</strong></div></div><div className="assumption-callout"><span>i</span><p>Largest sensitivity: <b>{sensitivity[0].short}</b> · each configured step moves expansion probability by {Math.abs(sensitivity[0].impact).toFixed(1)} pts.</p></div></div></section>
 
       <section className="bottom-grid"><div className="sensitivity panel"><div className="panel-head"><div><p className="eyebrow">SENSITIVITY RANKING</p><h2>Which assumptions matter most?</h2></div><span className="help">local · one-step impact</span></div>{sensitivity.slice(0, 5).map((item) => <div className="sensitivity-row" key={item.id}><span>{item.short}</span><div className="sensitivity-track"><i className={item.impact >= 0 ? "positive" : "negative-bar"} style={{ width: `${Math.min(100, Math.abs(item.impact) * 12)}%` }} /></div><b>{item.impact >= 0 ? "+" : "−"}{Math.abs(item.impact).toFixed(1)} pts</b></div>)}</div><div className="scenario panel"><div className="panel-head"><div><p className="eyebrow">SCENARIO WORKSPACE</p><h2>Save, compare, share</h2></div><span className="saved-count">{saved.length} saved locally</span></div><input className="scenario-name" value={scenarioName} onChange={(event) => setScenarioName(event.target.value)} aria-label="Scenario name" /><div className="scenario-actions"><button onClick={saveScenario}>＋ Save scenario</button><button onClick={share}>↗ Copy share link</button><button onClick={exportScenario}>↓ Export JSON</button></div><div className="model-note"><b>Model transparency</b><p>Weighted causal model · deterministic templates · bounded values · model version illustrative-0.1 · recalibration 04 Aug 2026.</p></div></div></section>
+
+      <section className="trend panel"><div className="panel-head"><div><p className="eyebrow">MODEL HISTORY</p><h2>How the house view is changing</h2></div><span className="help">release snapshots · not actuals</span></div><p className="trend-copy">The line records the published, probability-weighted view at each model release. It changes when evidence changes the house probabilities. It is not a claim that GDP or IT growth will follow a straight line.</p><div className="trend-chart"><svg viewBox="0 0 720 190" preserveAspectRatio="none"><line x1="45" y1="20" x2="45" y2="155" /><line x1="45" y1="155" x2="690" y2="155" /><polyline className="gdp-line" points="70,93 650,84" /><polyline className="it-line" points="70,73 650,61" /><circle cx="70" cy="93" r="5" /><circle cx="650" cy="84" r="5" /><circle cx="70" cy="73" r="5" /><circle cx="650" cy="61" r="5" /></svg><div className="trend-labels"><span>GDP growth <b>6.1 → 6.2%</b></span><span>IT growth <b>7.0 → 7.4%</b></span></div></div><div className="release-list">{modelHistory.map((release) => <div key={release.version}><b>{release.date} · v{release.version}</b><span>{release.note}</span><strong>GDP {release.gdp}% · IT {release.it}%</strong></div>)}</div></section>
 
       <footer><span>SCENARIO SIMULATOR · INDIAN IT</span><span>Illustrative coefficients, not empirically validated. <button>View methodology ↗</button></span></footer>
     </main>

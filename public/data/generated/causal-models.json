@@ -1,17 +1,45 @@
 {
-  "schemaVersion": "0.1",
-  "modelVersion": "illustrative-0.1",
-  "description": "Demonstration Indian IT causal model. Coefficients are illustrative, not empirically validated.",
+  "schemaVersion": "0.3",
+  "modelVersion": "evidence-linked-0.3",
+  "asOf": "2026-10-02",
+  "description": "Evidence-linked Indian IT scenario model. FY26 RBI export survey is historical calibration; AI capacity and GCC hiring observations retain company/survey scope. Coefficients remain illustrative, not statistically calibrated.",
   "geography": "India",
   "horizons": ["short", "medium", "long"],
   "transforms": ["linear", "logistic", "threshold", "saturating", "step", "inverse"],
-  "inputs": ["aiSpend", "adoption", "productivity", "pricing", "reskilling", "capability", "gdp", "insourcing"],
+  "inputs": ["aiSpend", "adoption", "productivity", "pricing", "reskilling", "capability", "gdp", "insourcing", "h1bShock", "aiExposure", "japanGcc", "exports", "capacityRelease", "oil", "fx", "gccHiring", "usExportShock", "fedRate"],
+  "anchors": {
+    "rbiSoftwareExportGrowthFY2026Pct": 8.2,
+    "rbiOffsiteShareFY2026Pct": 91.7,
+    "rbiUsDestinationShareFY2026Pct": 54.1,
+    "wiproCapacityEquivalentPctOfHeadcountApprox": 8,
+    "wiproCapacityEvidenceScope": "single company; redeployed, not reported as layoffs",
+    "currentBrentUsdPerBarrel": 102.6,
+    "currentUsdInr": 96.315,
+    "fedTargetMidpointPct": 3.875,
+    "gccGrossHiringSurveyMidpointPct": 13,
+    "activeNewH1BFeeWhileEnjoinedUsd": 0
+  },
   "feedbackLoops": [],
   "edges": [
     {"source":"aiSpend","target":"integration","polarity":"positive","weight":1.35,"lag":0,"confidence":0.62},
     {"source":"adoption","target":"integration","polarity":"positive","weight":0.48,"lag":1,"confidence":0.58},
     {"source":"reskilling","target":"capacity","polarity":"positive","weight":0.70,"lag":2,"confidence":0.55},
     {"source":"capability","target":"capacity","polarity":"positive","weight":0.62,"lag":1,"confidence":0.60},
-    {"source":"insourcing","target":"captured","polarity":"negative","weight":0.18,"lag":1,"confidence":0.49}
+    {"source":"insourcing","target":"captured","polarity":"negative","weight":0.18,"lag":1,"confidence":0.49},
+    {"source":"exports","target":"demand","polarity":"positive","weight":0.45,"lag":1,"confidence":0.55},
+    {"source":"usExportShock","target":"demand","polarity":"positive","weight":0.45,"lag":1,"confidence":0.50,"exposureSharePct":54.1},
+    {"source":"oil","target":"demand","polarity":"negative","weight":0.035,"lag":1,"confidence":0.42,"referenceUsdPerBarrel":80},
+    {"source":"oil","target":"revenue","polarity":"negative","weight":0.55,"lag":1,"confidence":0.38},
+    {"source":"oil","target":"costPressure","polarity":"positive","weight":0.025,"lag":1,"confidence":0.40,"referenceUsdPerBarrel":80},
+    {"source":"fedRate","target":"demand","polarity":"negative","weight":0.35,"lag":1,"confidence":0.43,"referencePct":3.5},
+    {"source":"fx","target":"reportedRevenue","polarity":"positive","weight":0.025,"lag":1,"confidence":0.35,"referenceUsdInr":96.3},
+    {"source":"capacityRelease","target":"headcountOutlook","polarity":"negative","weight":0.16,"lag":2,"confidence":0.35},
+    {"source":"gccHiring","target":"headcountOutlook","polarity":"positive","weight":0.09,"lag":1,"confidence":0.35}
+  ],
+  "notes": [
+    "Oil persistence multipliers by horizon are 1.00 short, 0.55 medium, and 0.20 long; these are illustrative lag assumptions.",
+    "USD/INR spot contributes only to reported INR translation, not constant-currency demand.",
+    "No sector-wide AI productivity rate is inferred from Wipro's capacity-equivalent disclosure.",
+    "H-1B injunction status is a policy branch; no automatic revenue or employment sign is assigned."
   ]
 }

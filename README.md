@@ -1,6 +1,6 @@
 # Indian IT Scenario Simulator
 
-Future Scenario Mapping is a browser-only simulator for exploring how eight assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified probabilities, impact analysis, sensitivity ranking, local saving, JSON export/import, and shareable URL state.
+Future Scenario Mapping is a browser-only simulator for exploring how 18 assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified probabilities, impact analysis, sensitivity ranking, local saving, JSON export/import, a dated evidence register, mathematical methodology and shareable URL state.
 
 The coefficients are currently illustrative and are not empirically validated. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
 
@@ -17,6 +17,16 @@ The coefficients are currently illustrative and are not empirically validated. T
 - Added a historical release view for the three calculated outcomes: expansion probability, compression probability and mixed-transition probability. The initial change is marked as a structural recalibration, not as evidence of a real industry move.
 - Treated AI employment risk as bounded exposure to work redesign, not a forecast that 20% of all jobs will disappear.
 - The current figures remain illustrative pending empirical calibration and backtesting.
+
+### 02 October 2026 — model 0.3
+
+- Added the RBI FY2025–26 software-export survey as a dated historical anchor: exports +8.2%, 91.7% off-site and 54.1% US destination share. The export-growth slider is an assumption compared with this anchor, not a forecast.
+- Added separate scenario controls for US software-export demand, Brent oil, the Fed target rate, USD/INR translation, GCC gross-hiring momentum and AI capacity released. The new controls preserve the evidence scope: Wipro's ~20,000 FTE-equivalent productivity capacity is redeployed and company-specific; ANSR's 12–15% is a survey gross-hiring signal, not net GCC employment.
+- Updated the current near-term macro nowcast to Brent $102.60 (2 Oct), USD/INR ₹96.315 (1 Oct) and the 3.75–4.00% Fed target range (16 Sep). Macro effects decay across the displayed horizon; FX affects reported INR translation separately from constant-currency demand.
+- Reflected the 30 Sep H‑1B fee injunction as a policy branch with the fee inactive while court orders operate. Appeal/reversal or a new rule remains a scenario, not a baseline forecast.
+- Kept the Accenture FY27 outlook as a peer demand check, TCS/Porsche MHP as a conditional transaction, HyperVault as phased data-centre capacity, and Japanese GCC growth as a confidence-weighted capability signal.
+- Added model equations, dated source links and a v0.3 changelog to the public app. At the current medium-horizon default, rounded model scores are Expansion 35%, Compression 52%, Mixed 13%, compared with v0.2's 36%, 51%, 13%. The shift is an illustrative structural recalculation, not an observed sector change or statistically calibrated probability.
+- Coefficients remain illustrative. No held-out historical backtest or sector-wide AI productivity estimate has been completed; keep Version 0.2 as the comparison benchmark.
 
 ## Run locally on Windows
 
@@ -64,7 +74,7 @@ Build with `VITE_BASE_PATH=/future-map/`, copy the contents of `dist/` into the 
 
 ## Updating the model
 
-Edit `public/data/generated/causal-models.json`, preserving its schema and valid JSON. The browser fetches this file at startup. Update the model version and description when coefficients or edges change, then run `npm test` and manually move each slider to verify that downstream values, probabilities, impact analysis, and sensitivity ranking update.
+Edit `public/data/generated/causal-models.json` and the corresponding inputs/formulas in `app/page.tsx`, preserving the schema and dated evidence scope. The browser fetches the model JSON at startup. Update the model version, displayed release history and README changelog when coefficients or edges change; run `npm run lint` and `npm test`, then verify the sliders and published static copy.
 
 ## Known limitations
 

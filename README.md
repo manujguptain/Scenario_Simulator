@@ -39,6 +39,14 @@ The scenario-score weights and hiring, AI, margin, and macro coefficients are il
 - This ten-row annual panel is a collection and coverage check, **not** an out-of-sample backtest: it has only two years per firm and no matched historical simulator inputs. No scenario weights or coefficients were fitted. Wipro segment-level revenue/margin and company-wide headcount, acquisition-related headcount changes, and reported-versus-adjusted margins are explicitly flagged.
 - Corrected the displayed RBI test count to use its computed eleven forecast origins rather than the stale text “seven”.
 
+### 02 October 2026 — quarterly company outcome coverage (data update; model 0.4 unchanged)
+
+- Added a source-linked Q1 FY2026/Q1 FY2027 outcome panel for TCS, Infosys, Wipro, HCLTech, and Tech Mahindra, covering disclosed year-over-year revenue growth and operating margins plus headcount/utilization where the cited company release provides them.
+- Kept each observation's release date, revenue basis, margin basis, source link, and comparability limits visible. Missing values remain blank rather than being inferred; Wipro's segment revenue is not presented as consolidated, Tech Mahindra Q1 FY2026 is reported USD rather than constant currency, and HCLTech's reported and adjusted FY2027 margins are distinguished.
+- Added a validator for the 10 source-linked quarterly observations and rendered the panel in the simulator.
+- **No simulator input, formula, coefficient, scenario score, or backtest score changed.** The new panel is a record of actual outcomes, not a historical model forecast test.
+- Historical quarterly simulator inputs and output forecasts were not archived, and the current three-way scores are normalized scores rather than numeric company forecasts. A valid rolling test therefore cannot be reconstructed from these actuals. Going forward, a forecast must be timestamped against a specific numeric target and full input vector before company results, then joined to the actual release after publication.
+
 ## Run locally on Windows
 
 Install Node.js 22 or newer, open PowerShell in this repository, and run:

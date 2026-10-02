@@ -1,0 +1,179 @@
+{
+  "datasetVersion": "company-outcomes-panel-0.1",
+  "asOf": "2026-10-02",
+  "purpose": "Outcome-only annual pilot for designing the company panel. It is not a fitted model or a backtest of simulator scores.",
+  "observations": [
+    {
+      "company": "TCS",
+      "fiscalYear": "FY2025",
+      "fiscalYearEnd": "2025-03-31",
+      "disclosedOn": "2025-04-10",
+      "ccRevenueGrowthPct": 4.2,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 24.3,
+      "marginBasis": "reported operating margin",
+      "headcount": 607979,
+      "headcountBasis": "company-reported closing employee headcount",
+      "limitations": [],
+      "sources": [
+        "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q4-fy-2025"
+      ]
+    },
+    {
+      "company": "TCS",
+      "fiscalYear": "FY2026",
+      "fiscalYearEnd": "2026-03-31",
+      "disclosedOn": "2026-04-09",
+      "ccRevenueGrowthPct": -2.4,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 25.0,
+      "marginBasis": "reported operating margin, excluding separately identified one-offs where stated by TCS",
+      "headcount": 584519,
+      "headcountBasis": "company-reported closing employee headcount",
+      "limitations": [],
+      "sources": [
+        "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q4-fy-2026"
+      ]
+    },
+    {
+      "company": "Infosys",
+      "fiscalYear": "FY2025",
+      "fiscalYearEnd": "2025-03-31",
+      "disclosedOn": "2025-04-17",
+      "ccRevenueGrowthPct": 4.2,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 21.1,
+      "marginBasis": "reported operating margin",
+      "headcount": 323578,
+      "headcountBasis": "company-reported global closing headcount",
+      "limitations": [],
+      "sources": [
+        "https://www.infosys.com/investors/reports-filings/quarterly-results/2024-2025/q4/documents/ifrs-usd-press-release.pdf",
+        "https://www.infosys.com/investors/reports-filings/financials/employee-data.html"
+      ]
+    },
+    {
+      "company": "Infosys",
+      "fiscalYear": "FY2026",
+      "fiscalYearEnd": "2026-03-31",
+      "disclosedOn": "2026-04-23",
+      "ccRevenueGrowthPct": 3.1,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 20.3,
+      "marginBasis": "reported operating margin",
+      "headcount": 328594,
+      "headcountBasis": "company-reported global closing headcount",
+      "limitations": ["FY2026 margin includes a disclosed labour-code-related charge; retain the reported figure and test adjusted margin separately if constructing that series."],
+      "sources": [
+        "https://www.infosys.com/investors/reports-filings/quarterly-results/2025-2026/q4.html",
+        "https://www.infosys.com/investors/reports-filings/financials/employee-data.html"
+      ]
+    },
+    {
+      "company": "Wipro",
+      "fiscalYear": "FY2025",
+      "fiscalYearEnd": "2025-03-31",
+      "disclosedOn": "2025-04-16",
+      "ccRevenueGrowthPct": -2.3,
+      "revenueScope": "IT Services segment revenue, non-GAAP constant currency",
+      "operatingMarginPct": 17.1,
+      "marginBasis": "IT Services segment operating margin",
+      "headcount": 233346,
+      "headcountBasis": "company-reported total employee count",
+      "limitations": ["Revenue and margin cover the IT Services segment; headcount is company-wide."],
+      "sources": [
+        "https://www.wipro.com/newsroom/press-releases/2025/wipro-announces-results-for-the-quarter-and-year-ended-march-31-2025/",
+        "https://www.wipro.com/content/dam/nexus/en/reports/annual-inclusion-and-belonging-report-fy25.pdf"
+      ]
+    },
+    {
+      "company": "Wipro",
+      "fiscalYear": "FY2026",
+      "fiscalYearEnd": "2026-03-31",
+      "disclosedOn": "2026-04-16",
+      "ccRevenueGrowthPct": -1.6,
+      "revenueScope": "IT Services segment revenue, non-GAAP constant currency",
+      "operatingMarginPct": 17.2,
+      "marginBasis": "IT Services segment operating margin",
+      "headcount": 242156,
+      "headcountBasis": "company-reported total employee count",
+      "limitations": ["Revenue and margin cover the IT Services segment; headcount is company-wide.", "FY2026 headcount includes the Harman DTS acquisition, closed during the year; this is not an organic hiring measure."],
+      "sources": [
+        "https://www.wipro.com/newsroom/press-releases/2026/wipro-announces-results-for-the-quarter-and-year-ended-march-31-2026/",
+        "https://www.wipro.com/investors/annual-reports/2025-26/"
+      ]
+    },
+    {
+      "company": "HCLTech",
+      "fiscalYear": "FY2025",
+      "fiscalYearEnd": "2025-03-31",
+      "disclosedOn": "2025-04-22",
+      "ccRevenueGrowthPct": 4.7,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 18.3,
+      "marginBasis": "reported EBIT margin",
+      "headcount": 223420,
+      "headcountBasis": "company-reported total people count",
+      "limitations": [],
+      "sources": [
+        "https://www.hcltech.com/en-us/press-releases/hcltech-delivers-another-year-industry-leading-growth",
+        "https://www.hcltech.com/hcl-annual-report-2025"
+      ]
+    },
+    {
+      "company": "HCLTech",
+      "fiscalYear": "FY2026",
+      "fiscalYearEnd": "2026-03-31",
+      "disclosedOn": "2026-04-21",
+      "ccRevenueGrowthPct": 3.9,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 17.2,
+      "marginBasis": "reported EBIT margin, including disclosed labour-code-related charge",
+      "headcount": 227181,
+      "headcountBasis": "company-reported total people count",
+      "limitations": ["Excluding the disclosed restructuring/labour-code impacts, HCLTech reported an adjusted EBIT margin of 17.9%; adjusted and reported series must not be mixed."],
+      "sources": [
+        "https://www.hcltech.com/en-us/press-releases/hcltech-fy26-revenue-39-led-increasing-demand-advanced-ai",
+        "https://www.hcltech.com/sites/default/files/document/open/quarter-results/2026-04/hcltech-q4-fy26-investor-release.pdf"
+      ]
+    },
+    {
+      "company": "Tech Mahindra",
+      "fiscalYear": "FY2025",
+      "fiscalYearEnd": "2025-03-31",
+      "disclosedOn": "2025-04-24",
+      "ccRevenueGrowthPct": 0.3,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 9.7,
+      "marginBasis": "reported EBIT margin",
+      "headcount": 148731,
+      "headcountBasis": "company-reported total headcount",
+      "limitations": [],
+      "sources": [
+        "https://www.techmahindra.com/insights/press-releases/techmahindra-q4-fy25-results/"
+      ]
+    },
+    {
+      "company": "Tech Mahindra",
+      "fiscalYear": "FY2026",
+      "fiscalYearEnd": "2026-03-31",
+      "disclosedOn": "2026-04-22",
+      "ccRevenueGrowthPct": 0.6,
+      "revenueScope": "consolidated company revenue, constant currency",
+      "operatingMarginPct": 12.6,
+      "marginBasis": "reported EBIT margin",
+      "headcount": 147623,
+      "headcountBasis": "company-reported total headcount",
+      "limitations": [],
+      "sources": [
+        "https://www.techmahindra.com/insights/press-releases/techmahindra-q4-fy26-results/"
+      ]
+    }
+  ],
+  "interpretation": [
+    "This is a source-linked first collection of outcomes, not a predictive backtest: it has only two annual observations per firm and no matched point-in-time model inputs.",
+    "Revenue and margin scopes differ, especially Wipro segment measures versus other companies' consolidated measures. Keep company series separate unless a harmonized definition is available.",
+    "Headcount is not consistently adjusted for acquisitions. Wipro FY2026 includes the Harman DTS acquisition, so its year-over-year headcount change is not organic hiring.",
+    "Do not fit AI, GCC, policy, hiring, or margin coefficients from these ten observations. Expand the panel to quarterly point-in-time observations and test against simple baselines first."
+  ]
+}

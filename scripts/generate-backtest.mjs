@@ -63,8 +63,8 @@ const output = {
   },
   forecasts,
   caveats: [
-    "Only seven expanding-window test origins are available; the benchmark ranking is descriptive and statistically weak.",
-    "RBI release gaps vary, so these are next-release forecasts (6.2–15.9 months), not fixed-horizon forecasts.",
+    "Only eleven expanding-window test origins are available; the benchmark ranking is still descriptive, with limited power and possible RBI survey-method breaks.",
+    "RBI release gaps vary, so these are next-release forecasts (6.2–15.9 months), not fixed-horizon forecasts. RBI survey estimation and classification methods changed over time, so the longer sample may contain measurement breaks.",
     "This tests only annual software-export growth. It does not validate the scenario-score mix, hiring, AI productivity, margins, or employment assumptions.",
     "Export values are in current US dollars and therefore combine volume, price/mix, and annual-average exchange-rate effects.",
     "The RBI series excludes software services supplied via overseas commercial presence; do not equate it with total revenue of Indian IT companies."

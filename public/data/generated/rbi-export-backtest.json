@@ -3,27 +3,67 @@
   "asOf": "2026-10-02",
   "target": "RBI annual software-services export growth, year on year",
   "scope": "Exports by Indian companies, excluding sales through overseas commercial presence; current-dollar measure using RBI annual-average exchange rates.",
-  "method": "At each RBI release date after the first, forecast the next published annual growth rate with (1) latest-growth persistence and (2) the median of all growth rates available at that origin. This is an expanding-window, release-to-release benchmark; it is not a fixed 12-month-ahead forecast. No parameters are fitted.",
-  "observationCount": 8,
-  "outOfSampleForecastCount": 7,
+  "method": "At each RBI release date after the first, forecast the next published annual growth rate with (1) latest-growth persistence and (2) the median of all growth rates available at that origin. This is an expanding-window, release-to-release benchmark; it is not a fixed 12-month-ahead forecast. No parameters are fitted. The expanded historical series includes 2014-15 through 2017-18 RBI releases; RBI survey estimation and classification methods changed over time, so the longer sample has potential measurement breaks.",
+  "observationCount": 12,
+  "outOfSampleForecastCount": 11,
   "horizonMonths": {
     "min": 6.176591375770021,
-    "mean": 11.714872396597242,
+    "mean": 11.75882023520627,
     "max": 15.901437371663244
   },
   "benchmarks": {
     "persistence": {
-      "maePp": 5.828571428571427,
-      "rmsePp": 8.160882305241264,
-      "meanErrorPp": -0.08571428571428578
+      "maePp": 5.036363636363636,
+      "rmsePp": 7.012845356914695,
+      "meanErrorPp": -0.6000000000000001
     },
     "expandingMedian": {
-      "maePp": 4.5214285714285705,
-      "rmsePp": 5.697461840905248,
-      "meanErrorPp": 0.6642857142857138
+      "maePp": 4.199999999999999,
+      "rmsePp": 5.232546746522716,
+      "meanErrorPp": -0.9090909090909093
     }
   },
   "forecasts": [
+    {
+      "originFy": "2014-15",
+      "originPublished": "2015-12-08",
+      "targetFy": "2015-16",
+      "targetPublished": "2016-10-20",
+      "actualGrowthPct": 7.3,
+      "persistenceForecastPct": 14.8,
+      "expandingMedianForecastPct": 14.8,
+      "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=38361"
+    },
+    {
+      "originFy": "2015-16",
+      "originPublished": "2016-10-20",
+      "targetFy": "2016-17",
+      "targetPublished": "2017-12-08",
+      "actualGrowthPct": 10.3,
+      "persistenceForecastPct": 7.3,
+      "expandingMedianForecastPct": 11.05,
+      "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=42513"
+    },
+    {
+      "originFy": "2016-17",
+      "originPublished": "2017-12-08",
+      "targetFy": "2017-18",
+      "targetPublished": "2018-12-10",
+      "actualGrowthPct": 11.6,
+      "persistenceForecastPct": 10.3,
+      "expandingMedianForecastPct": 10.3,
+      "targetSource": "https://m.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=45700"
+    },
+    {
+      "originFy": "2017-18",
+      "originPublished": "2018-12-10",
+      "targetFy": "2018-19",
+      "targetPublished": "2019-11-18",
+      "actualGrowthPct": 8.8,
+      "persistenceForecastPct": 11.6,
+      "expandingMedianForecastPct": 10.95,
+      "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=48664"
+    },
     {
       "originFy": "2018-19",
       "originPublished": "2019-11-18",
@@ -31,7 +71,7 @@
       "targetPublished": "2021-03-16",
       "actualGrowthPct": 9.1,
       "persistenceForecastPct": 8.8,
-      "expandingMedianForecastPct": 8.8,
+      "expandingMedianForecastPct": 10.3,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=51278"
     },
     {
@@ -41,7 +81,7 @@
       "targetPublished": "2021-09-20",
       "actualGrowthPct": 4,
       "persistenceForecastPct": 9.1,
-      "expandingMedianForecastPct": 8.95,
+      "expandingMedianForecastPct": 9.7,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=52258"
     },
     {
@@ -51,7 +91,7 @@
       "targetPublished": "2022-09-08",
       "actualGrowthPct": 17.2,
       "persistenceForecastPct": 4,
-      "expandingMedianForecastPct": 8.8,
+      "expandingMedianForecastPct": 9.1,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=54338"
     },
     {
@@ -61,7 +101,7 @@
       "targetPublished": "2023-10-12",
       "actualGrowthPct": 18.4,
       "persistenceForecastPct": 17.2,
-      "expandingMedianForecastPct": 8.95,
+      "expandingMedianForecastPct": 9.7,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=56542"
     },
     {
@@ -71,7 +111,7 @@
       "targetPublished": "2024-10-18",
       "actualGrowthPct": 2.8,
       "persistenceForecastPct": 18.4,
-      "expandingMedianForecastPct": 9.1,
+      "expandingMedianForecastPct": 10.3,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=58937"
     },
     {
@@ -81,7 +121,7 @@
       "targetPublished": "2025-11-04",
       "actualGrowthPct": 7.3,
       "persistenceForecastPct": 2.8,
-      "expandingMedianForecastPct": 8.95,
+      "expandingMedianForecastPct": 9.7,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=61562"
     },
     {
@@ -91,13 +131,13 @@
       "targetPublished": "2026-09-18",
       "actualGrowthPct": 8.2,
       "persistenceForecastPct": 7.3,
-      "expandingMedianForecastPct": 8.8,
+      "expandingMedianForecastPct": 9.1,
       "targetSource": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63625"
     }
   ],
   "caveats": [
-    "Only seven expanding-window test origins are available; the benchmark ranking is descriptive and statistically weak.",
-    "RBI release gaps vary, so these are next-release forecasts (6.2–15.9 months), not fixed-horizon forecasts.",
+    "Only eleven expanding-window test origins are available; the benchmark ranking is still descriptive, with limited power and possible RBI survey-method breaks.",
+    "RBI release gaps vary, so these are next-release forecasts (6.2–15.9 months), not fixed-horizon forecasts. RBI survey estimation and classification methods changed over time, so the longer sample may contain measurement breaks.",
     "This tests only annual software-export growth. It does not validate the scenario-score mix, hiring, AI productivity, margins, or employment assumptions.",
     "Export values are in current US dollars and therefore combine volume, price/mix, and annual-average exchange-rate effects.",
     "The RBI series excludes software services supplied via overseas commercial presence; do not equate it with total revenue of Indian IT companies."

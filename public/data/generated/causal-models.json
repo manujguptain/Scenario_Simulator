@@ -22,10 +22,10 @@
   "feedbackLoops": [],
   "backtest": {
     "target": "RBI annual software-services export growth",
-    "origins": 7,
+    "origins": 11,
     "benchmarks": ["latest-growth persistence", "expanding historical median"],
-    "expandingMedianMaePercentagePoints": 4.52,
-    "persistenceMaePercentagePoints": 5.83,
+    "expandingMedianMaePercentagePoints": 4.2,
+    "persistenceMaePercentagePoints": 5.0364,
     "interpretation": "Descriptive small-sample result; does not calibrate scenario scores, employment, hiring, AI productivity or margins."
   },
   "edges": [
@@ -49,7 +49,7 @@
     "USD/INR spot contributes only to reported INR translation, not constant-currency demand.",
     "No sector-wide AI productivity rate is inferred from Wipro's capacity-equivalent disclosure.",
     "Expansion/compression/mixed shares are normalized scenario scores, not calibrated probabilities.",
-    "The RBI export-growth benchmark has only seven rolling release origins and is not a fixed-horizon forecast."
+    "The RBI export-growth benchmark has eleven rolling release origins and is not a fixed-horizon forecast."
     "H-1B injunction status is a policy branch; no automatic revenue or employment sign is assigned."
   ]
 }

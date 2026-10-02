@@ -63,7 +63,7 @@ const modelHistory = [
     note: "Why it changed: added an expanding-window, publication-date backtest for one observable target—RBI software-export growth. This tests only the export-growth persistence assumption; it does not validate the three-way scenario weights or hiring coefficients.",
     changeType: "first backtest",
     updates: [
-      { label: "RBI export-growth benchmark", effect: "Provisional", detail: "Seven next-release forecasts: expanding-median MAE 4.52 pp / RMSE 5.70 pp versus persistence MAE 5.83 pp / RMSE 8.16 pp. Small sample; no fitted weights." },
+      { label: "RBI export-growth benchmark", effect: "Provisional", detail: "Eleven next-release forecasts: expanding-median MAE 4.20 pp / RMSE 5.23 pp versus persistence MAE 5.04 pp / RMSE 7.01 pp. Longer sample, but small and potentially affected by survey-method breaks; no fitted weights." },
       { label: "Scenario score language", effect: "Clarified", detail: "Expansion/compression/mixed shares are normalized model-score weights, not calibrated probabilities. No empirical class-probability test exists yet." },
     ],
   },

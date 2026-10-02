@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "0.3",
-  "modelVersion": "evidence-linked-0.3",
+  "schemaVersion": "0.4",
+  "modelVersion": "evidence-linked-0.4",
   "asOf": "2026-10-02",
-  "description": "Evidence-linked Indian IT scenario model. FY26 RBI export survey is historical calibration; AI capacity and GCC hiring observations retain company/survey scope. Coefficients remain illustrative, not statistically calibrated.",
+  "description": "Evidence-linked Indian IT scenario model. An expanding-window benchmark tests only RBI software-export growth; scenario-score weights and hiring/margin coefficients remain illustrative and uncalibrated.",
   "geography": "India",
   "horizons": ["short", "medium", "long"],
   "transforms": ["linear", "logistic", "threshold", "saturating", "step", "inverse"],
@@ -20,6 +20,14 @@
     "activeNewH1BFeeWhileEnjoinedUsd": 0
   },
   "feedbackLoops": [],
+  "backtest": {
+    "target": "RBI annual software-services export growth",
+    "origins": 7,
+    "benchmarks": ["latest-growth persistence", "expanding historical median"],
+    "expandingMedianMaePercentagePoints": 4.52,
+    "persistenceMaePercentagePoints": 5.83,
+    "interpretation": "Descriptive small-sample result; does not calibrate scenario scores, employment, hiring, AI productivity or margins."
+  },
   "edges": [
     {"source":"aiSpend","target":"integration","polarity":"positive","weight":1.35,"lag":0,"confidence":0.62},
     {"source":"adoption","target":"integration","polarity":"positive","weight":0.48,"lag":1,"confidence":0.58},
@@ -40,6 +48,8 @@
     "Oil persistence multipliers by horizon are 1.00 short, 0.55 medium, and 0.20 long; these are illustrative lag assumptions.",
     "USD/INR spot contributes only to reported INR translation, not constant-currency demand.",
     "No sector-wide AI productivity rate is inferred from Wipro's capacity-equivalent disclosure.",
+    "Expansion/compression/mixed shares are normalized scenario scores, not calibrated probabilities.",
+    "The RBI export-growth benchmark has only seven rolling release origins and is not a fixed-horizon forecast."
     "H-1B injunction status is a policy branch; no automatic revenue or employment sign is assigned."
   ]
 }

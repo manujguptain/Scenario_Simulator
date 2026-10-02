@@ -1,8 +1,8 @@
 # Indian IT Scenario Simulator
 
-Future Scenario Mapping is a browser-only simulator for exploring how 18 assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified probabilities, impact analysis, sensitivity ranking, local saving, JSON export/import, a dated evidence register, mathematical methodology and shareable URL state.
+Future Scenario Mapping is a browser-only simulator for exploring how 18 assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified scenario scores, impact analysis, sensitivity ranking, local saving, JSON export/import, a dated evidence register, mathematical methodology, a release-by-release export-growth backtest, and shareable URL state.
 
-The coefficients are currently illustrative and are not empirically validated. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
+The scenario-score weights and hiring, AI, margin, and macro coefficients are illustrative and not empirically validated. The first backtest evaluates only two simple RBI export-growth benchmarks; it does not validate the broader model. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
 
 ## Public changelog
 
@@ -14,9 +14,9 @@ The coefficients are currently illustrative and are not empirically validated. T
   2. **AI adoption and reported job-risk signals — mixed.** It adds near-term negative pressure on routine work and hiring, with a longer-term upside only if Indian firms capture new AI and engineering work.
   3. **Japanese GCC expansion — positive, confidence-weighted.** It may increase India-based engineering and higher-value capability demand, but the eventual scale and timing are uncertain.
 - The 34%→36% expansion movement reflects this model redesign, not an observed improvement in the sector. No individual development has been assigned a fabricated percentage-point contribution.
-- Added a historical release view for the three calculated outcomes: expansion probability, compression probability and mixed-transition probability. The initial change is marked as a structural recalibration, not as evidence of a real industry move.
+- Added a historical release view for the three calculated outcomes: expansion, compression and mixed-transition score shares. They are not calibrated probabilities. The initial change is marked as a structural recalibration, not as evidence of a real industry move.
 - Treated AI employment risk as bounded exposure to work redesign, not a forecast that 20% of all jobs will disappear.
-- The current figures remain illustrative pending empirical calibration and backtesting.
+- At this release, all figures were illustrative and had not been empirically backtested.
 
 ### 02 October 2026 — model 0.3
 
@@ -26,7 +26,15 @@ The coefficients are currently illustrative and are not empirically validated. T
 - Reflected the 30 Sep H‑1B fee injunction as a policy branch with the fee inactive while court orders operate. Appeal/reversal or a new rule remains a scenario, not a baseline forecast.
 - Kept the Accenture FY27 outlook as a peer demand check, TCS/Porsche MHP as a conditional transaction, HyperVault as phased data-centre capacity, and Japanese GCC growth as a confidence-weighted capability signal.
 - Added model equations, dated source links and a v0.3 changelog to the public app. At the current medium-horizon default, rounded model scores are Expansion 35%, Compression 52%, Mixed 13%, compared with v0.2's 36%, 51%, 13%. The shift is an illustrative structural recalculation, not an observed sector change or statistically calibrated probability.
-- Coefficients remain illustrative. No held-out historical backtest or sector-wide AI productivity estimate has been completed; keep Version 0.2 as the comparison benchmark.
+- At v0.3, coefficients remained illustrative and no held-out historical backtest had been completed; Version 0.2 remained the score-mix comparison benchmark.
+
+### 02 October 2026 — model 0.4
+
+- Added a reproducible expanding-window backtest of RBI annual software-services export growth using eight RBI releases from FY2018–19 to FY2025–26, producing seven next-release forecast origins. Data, dates and direct RBI source links are stored in `data/rbi-export-surveys.json`; `scripts/generate-backtest.mjs` regenerates the reported results.
+- Compared two no-fit benchmarks at every origin: latest-growth persistence and the median of all growth rates available by that release date. Across the seven forecasts, expanding median MAE/RMSE were **4.52/5.70 percentage points**; persistence MAE/RMSE were **5.83/8.16 points**. Errors are absolute and squared forecast errors in annual growth percentage points.
+- No coefficients were fit and the scenario baseline was not changed based on this small sample. The ranking is descriptive only: seven observations span pandemic-era boom/bust, and RBI release gaps vary from 6.2 to 15.9 months, so this is not a fixed-horizon forecasting test.
+- Added the fold-level forecast table, metrics, data-scope caveats and build-time integrity checks to the simulator. The current FY2025–26 +8.2% slider value remains a historical anchor, not a newly generated forecast.
+- Explicitly renamed the expansion/compression/mixed outputs as normalized **scenario-score shares**, not probabilities. The backtest does not validate those scores or hiring, AI-productivity, margin, or employment coefficients.
 
 ## Run locally on Windows
 
@@ -47,7 +55,7 @@ npm test
 npm run build
 ```
 
-The static output is written to `dist/`. The build verification checks the HTML, JavaScript and CSS assets, model JSON, relative paths, subdirectory compatibility, and absence of server or Cloudflare endpoints.
+The static output is written to `dist/`. The build regenerates the backtest JSON from its source data, then checks the HTML, JavaScript and CSS assets, model and backtest JSON, relative paths, subdirectory compatibility, and absence of server or Cloudflare endpoints. `npm test` also checks the walk-forward forecast count, chronology and benchmark error metrics.
 
 ## Base path
 

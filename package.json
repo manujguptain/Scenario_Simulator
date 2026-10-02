@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && node tests/verify-build.mjs",
-    "test": "npm run build",
+    "build": "node scripts/generate-backtest.mjs && tsc --noEmit && vite build && node tests/verify-build.mjs",
+    "test": "npm run build && node tests/verify-backtest.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern node_modules"
   },
   "dependencies": {

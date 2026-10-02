@@ -1,0 +1,15 @@
+{
+  "target": "RBI annual software-services export growth, year on year",
+  "scope": "Exports by Indian companies, excluding sales through overseas commercial presence; current-dollar measure using RBI annual-average exchange rates.",
+  "series": [
+    {"fy":"2018-19","exportsUsdBn":117.9,"growthPct":8.8,"published":"2019-11-18","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=48664"},
+    {"fy":"2019-20","exportsUsdBn":128.6,"growthPct":9.1,"published":"2021-03-16","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=51278"},
+    {"fy":"2020-21","exportsUsdBn":133.7,"growthPct":4.0,"published":"2021-09-20","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=52258"},
+    {"fy":"2021-22","exportsUsdBn":156.7,"growthPct":17.2,"published":"2022-09-08","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=54338"},
+    {"fy":"2022-23","exportsUsdBn":185.5,"growthPct":18.4,"published":"2023-10-12","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=56542"},
+    {"fy":"2023-24","exportsUsdBn":190.7,"growthPct":2.8,"published":"2024-10-18","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=58937"},
+    {"fy":"2024-25","exportsUsdBn":204.7,"growthPct":7.3,"published":"2025-11-04","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=61562"},
+    {"fy":"2025-26","exportsUsdBn":221.4,"growthPct":8.2,"published":"2026-09-18","source":"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63625"}
+  ],
+  "method": "At each RBI release date after the first, forecast the next published annual growth rate with (1) latest-growth persistence and (2) the median of all growth rates available at that origin. This is an expanding-window, release-to-release benchmark; it is not a fixed 12-month-ahead forecast. No parameters are fitted."
+}

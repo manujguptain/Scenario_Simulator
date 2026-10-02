@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const dist = fileURLToPath(new URL("../dist/", import.meta.url));
 assert.ok(existsSync(join(dist, "index.html")), "dist/index.html is required");
 assert.ok(existsSync(join(dist, "data", "generated", "causal-models.json")), "causal-models.json is required");
+assert.ok(existsSync(join(dist, "data", "generated", "rbi-export-backtest.json")), "RBI export backtest data is required");
 const html = readFileSync(join(dist, "index.html"), "utf8");
 assert.match(html, /<script[^>]+src="(?:\.\/|\/[^\"]+\/)?assets\//, "JavaScript asset path is required");
 assert.match(html, /<link[^>]+href="(?:\.\/|\/[^\"]+\/)?assets\//, "CSS asset path is required");

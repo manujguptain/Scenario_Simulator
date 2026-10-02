@@ -2,7 +2,7 @@
 
 Future Scenario Mapping is a browser-only simulator for exploring how 18 assumptions can change plausible Indian IT outcomes across short (0–3 year), medium (3–7 year), and long (7–15 year) horizons. It includes a live causal impact map, Build Your Scenario and Change One Factor modes, baseline-versus-modified scenario scores, impact analysis, sensitivity ranking, local saving, JSON export/import, a dated evidence register, mathematical methodology, a release-by-release export-growth backtest, and shareable URL state.
 
-The scenario-score weights and hiring, AI, margin, and macro coefficients are illustrative and not empirically validated. The first backtest evaluates only two simple RBI export-growth benchmarks; it does not validate the broader model. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
+The scenario-score weights and hiring, AI, margin, and macro coefficients are illustrative and not empirically validated. The RBI export-growth benchmark and the initial company-outcomes panel are separate evidence checks; neither validates the broader model or its coefficients. The model is deterministic: the same inputs always produce the same result, and no API key, account, server, or backend is required. The published trendline records dated model snapshots; it is not a record of actual GDP or IT growth.
 
 ## Public changelog
 
@@ -35,6 +35,9 @@ The scenario-score weights and hiring, AI, margin, and macro coefficients are il
 - No coefficients were fit and the scenario baseline was not changed based on this small sample. The ranking is descriptive only: eleven observations span pre-pandemic growth and pandemic-era boom/bust, the survey methodology may have changed, and release gaps vary from 6.2 to 15.9 months, so this is not a fixed-horizon forecasting test.
 - Added the fold-level forecast table, metrics, data-scope caveats and build-time integrity checks to the simulator. The current FY2025–26 +8.2% slider value remains a historical anchor, not a newly generated forecast.
 - Explicitly renamed the expansion/compression/mixed outputs as normalized **scenario-score shares**, not probabilities. The backtest does not validate those scores or hiring, AI-productivity, margin, or employment coefficients.
+- Started a source-linked company outcome panel with FY2025 and FY2026 reported constant-currency revenue growth, operating margin, and headcount for TCS, Infosys, Wipro, HCLTech, and Tech Mahindra. The raw observations and metric scopes are in `data/company-outcomes-panel.json`; `scripts/verify-company-panel.mjs` checks source links, dates, scope fields, duplicates, and coverage.
+- This ten-row annual panel is a collection and coverage check, **not** an out-of-sample backtest: it has only two years per firm and no matched historical simulator inputs. No scenario weights or coefficients were fitted. Wipro segment-level revenue/margin and company-wide headcount, acquisition-related headcount changes, and reported-versus-adjusted margins are explicitly flagged.
+- Corrected the displayed RBI test count to use its computed eleven forecast origins rather than the stale text “seven”.
 
 ## Run locally on Windows
 

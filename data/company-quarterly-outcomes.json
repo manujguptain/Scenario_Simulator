@@ -1,0 +1,109 @@
+{
+  "datasetVersion": "company-quarterly-outcomes-0.1",
+  "asOf": "2026-10-02",
+  "purpose": "Matched quarter outcome panel for five listed Indian IT-services companies. It is a descriptive outcome panel, not a simulator score backtest.",
+  "quarterPairs": ["Q1 FY2026", "Q1 FY2027"],
+  "observations": [
+    {
+      "company": "TCS", "quarter": "Q1 FY2026", "periodEnd": "2025-06-30", "disclosedOn": "2025-07-10",
+      "revenueGrowthYoYPct": -3.1, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 24.5, "marginBasis": "reported operating margin",
+      "headcount": 613069, "headcountBasis": "company-reported closing workforce",
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q1-fy-2026"],
+      "limitations": []
+    },
+    {
+      "company": "TCS", "quarter": "Q1 FY2027", "periodEnd": "2026-06-30", "disclosedOn": "2026-07-09",
+      "revenueGrowthYoYPct": 3.2, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 24.0, "marginBasis": "reported operating margin, excluding exceptional item",
+      "headcount": 593798, "headcountBasis": "company-reported closing workforce",
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q1-fy-2027"],
+      "limitations": []
+    },
+    {
+      "company": "Infosys", "quarter": "Q1 FY2026", "periodEnd": "2025-06-30", "disclosedOn": "2025-07-23",
+      "revenueGrowthYoYPct": 3.8, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 20.8, "marginBasis": "reported operating margin",
+      "headcount": 323788, "headcountBasis": "company-reported total employees",
+      "utilizationPct": 82.7, "utilizationBasis": "consolidated IT services utilization, including trainees",
+      "sources": ["https://www.infosys.com/investors/reports-filings/quarterly-results/2025-2026/q1/documents/transcripts/earningscall.pdf", "https://www.infosys.com/investors/documents/exchange-filings/2026/outcome-board-meeting-23jul2026.pdf"],
+      "limitations": ["Utilization is from the Q1 FY2026 comparator disclosed in Infosys' Q1 FY2027 fact sheet."]
+    },
+    {
+      "company": "Infosys", "quarter": "Q1 FY2027", "periodEnd": "2026-06-30", "disclosedOn": "2026-07-23",
+      "revenueGrowthYoYPct": 2.4, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 21.1, "marginBasis": "reported operating margin",
+      "headcount": 328062, "headcountBasis": "company-reported total employees",
+      "utilizationPct": 82.1, "utilizationBasis": "consolidated IT services utilization, including trainees",
+      "sources": ["https://www.infosys.com/about/last-quarter.html", "https://www.infosys.com/investors/documents/exchange-filings/2026/outcome-board-meeting-23jul2026.pdf"],
+      "limitations": ["Reported operating margin includes a ₹1,289 crore labour-code-related charge disclosed by Infosys."]
+    },
+    {
+      "company": "Wipro", "quarter": "Q1 FY2026", "periodEnd": "2025-06-30", "disclosedOn": "2025-07-17",
+      "revenueGrowthYoYPct": -2.3, "revenueGrowthBasis": "non-GAAP constant currency, IT Services segment",
+      "operatingMarginPct": 17.3, "marginBasis": "IT Services segment operating margin",
+      "headcount": null, "headcountBasis": null,
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.wipro.com/newsroom/press-releases/2025/wipro-announces-results-for-the-quarter-and-year-ended-june-30-2025/"],
+      "limitations": ["Quarterly closing headcount was not included in the cited results release."]
+    },
+    {
+      "company": "Wipro", "quarter": "Q1 FY2027", "periodEnd": "2026-06-30", "disclosedOn": "2026-07-16",
+      "revenueGrowthYoYPct": 0.9, "revenueGrowthBasis": "non-GAAP constant currency, IT Services segment",
+      "operatingMarginPct": 16.0, "marginBasis": "IT Services segment operating margin",
+      "headcount": null, "headcountBasis": null,
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.wipro.com/newsroom/press-releases/2026/wipro-announces-results-for-the-quarter-ended-june-30-2026/"],
+      "limitations": ["Quarterly closing headcount was not included in the cited results release."]
+    },
+    {
+      "company": "HCLTech", "quarter": "Q1 FY2026", "periodEnd": "2025-06-30", "disclosedOn": "2025-07-14",
+      "revenueGrowthYoYPct": 3.7, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 16.3, "marginBasis": "reported EBIT margin",
+      "headcount": 223151, "headcountBasis": "company-reported total people count",
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.hcltech.com/en-us/press-releases/hcltech-delivers-healthy-revenue-growth-37-yoy-q1-fy26", "https://www.hcltech.com/sites/default/files/document/open/quarter-results/2025-07/hcltech-q1-fy26-investor-release.pdf"],
+      "limitations": []
+    },
+    {
+      "company": "HCLTech", "quarter": "Q1 FY2027", "periodEnd": "2026-06-30", "disclosedOn": "2026-07-13",
+      "revenueGrowthYoYPct": 2.6, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 16.9, "marginBasis": "reported EBIT margin",
+      "headcount": null, "headcountBasis": null,
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.hcltech.com/en-us/press-releases/hcltech-delivers-robust-q1-led-record-deal-bookings-24-billion"],
+      "limitations": ["The company also reported an adjusted EBIT margin of 17.5% excluding restructuring costs; exact closing headcount was not included in the cited release."]
+    },
+    {
+      "company": "Tech Mahindra", "quarter": "Q1 FY2026", "periodEnd": "2025-06-30", "disclosedOn": "2025-07-16",
+      "revenueGrowthYoYPct": 0.4, "revenueGrowthBasis": "reported USD revenue; constant-currency growth not used in this observation",
+      "operatingMarginPct": 11.1, "marginBasis": "reported EBIT margin",
+      "headcount": 148517, "headcountBasis": "company-reported total headcount",
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.techmahindra.com/insights/press-releases/techmahindra-q1-fy26-results/"],
+      "limitations": ["Revenue growth basis is reported USD and is not directly comparable to constant-currency rates in other company rows."]
+    },
+    {
+      "company": "Tech Mahindra", "quarter": "Q1 FY2027", "periodEnd": "2026-06-30", "disclosedOn": "2026-07-16",
+      "revenueGrowthYoYPct": 6.6, "revenueGrowthBasis": "constant currency, consolidated revenue",
+      "operatingMarginPct": 14.4, "marginBasis": "reported EBIT margin",
+      "headcount": 146760, "headcountBasis": "company-reported total headcount",
+      "utilizationPct": null, "utilizationBasis": null,
+      "sources": ["https://www.techmahindra.com/insights/press-releases/techmahindra-q1-fy27-results/"],
+      "limitations": []
+    }
+  ],
+  "backtestReadiness": {
+    "historicalSimulatorInputs": "not archived",
+    "historicalModelOutputs": "not archived at quarterly origins",
+    "status": "quarterly actuals panel only; no rolling score backtest or coefficient estimation",
+    "nextRequirement": "freeze and timestamp each future model input vector and forecast output before company results are published; append the actual outcomes after publication"
+  },
+  "interpretation": [
+    "This matched Q1 panel shows actual company outcomes and selected operational metrics. It does not prove causation or validate expansion/compression/mixed score shares.",
+    "Wipro segment revenue and margins differ in scope from consolidated peers; Tech Mahindra Q1 FY2026 revenue growth is reported USD while the other observation is constant currency; HCLTech FY2027 margin is adjusted for restructuring; Infosys FY2027 reported margin includes a labour-code charge.",
+    "The simulator's historical quarterly input vectors and forecasts were not saved. Therefore these observations cannot honestly be scored as out-of-sample errors for the existing simulator."
+  ]
+}
